@@ -23,11 +23,14 @@ contiguous_allocator::contiguous_allocator(size_t malloc_size_minimum, size_t ma
 
 	if (Malloc == nullptr) {
 		printf(" x Memory initialization failed.\n");
+		Malloc_size_current = 0;
+	}
+	else {
+		printf(" > Memory initialized successfully.\n");
+		Malloc_size_current = malloc_size_minimum;
 	}
 
-	Malloc_size_current = malloc_size_minimum;
-	Malloc_size_maximum = malloc_size_maximum;
-
+	Malloc_size_maximum        = malloc_size_maximum;
 	Malloc_expansion_increment = malloc_size_minimum;
 
 	Data_root = uintptr_t(Malloc) + address_alignment_offset(uintptr_t(Malloc), ALLOCATION_ALIGNMENT);
