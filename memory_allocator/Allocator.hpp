@@ -74,27 +74,25 @@ namespace allocator {
 		
 			if (SAFETY_MEASURES) {
 
+				if (allocation_alignment < alignof(type)) {
+					allocation_alignment = alignof(type);
+				}
+
 				if (allocation_alignment > ALLOCATION_ALIGNMENT) {
 					printf(" x Memory allocation canceled.\n");
 					printf("   Requested allocation alignment was too high.\n");
 					return ALLOCATION_FAILURE;
 				}
 
-				if (allocation_alignment > alignof(type)) {
-
-					if (allocation_alignment & (allocation_alignment - 1)) {
-						allocation_alignment--;
-						allocation_alignment |= allocation_alignment >>  1;
-						allocation_alignment |= allocation_alignment >>  2;
-						allocation_alignment |= allocation_alignment >>  4;
-						allocation_alignment |= allocation_alignment >>  8;
-						allocation_alignment |= allocation_alignment >> 16;
-						allocation_alignment |= allocation_alignment >> 32;
-						allocation_alignment++;
-					}
-				}
-				else {
-					allocation_alignment = alignof(type);
+				if (allocation_alignment & (allocation_alignment - 1)) {
+					allocation_alignment--;
+					allocation_alignment |= allocation_alignment >>  1;
+					allocation_alignment |= allocation_alignment >>  2;
+					allocation_alignment |= allocation_alignment >>  4;
+					allocation_alignment |= allocation_alignment >>  8;
+					allocation_alignment |= allocation_alignment >> 16;
+					allocation_alignment |= allocation_alignment >> 32;
+					allocation_alignment++;
 				}
 			}
 
