@@ -118,6 +118,18 @@ int main() {
 		printf(" >   Valid address is nullptr -- %i\n", Memory0.locate<int>(Alloc0) == nullptr);
 		printf(" > Invalid address is nullptr -- %i\n", Memory0.locate<char>(MALLOC_SIZE_MAXIMUM + 1) == nullptr);
 		printf("\n\n");
+
+
+		printf(" ! Data dumping and loading\n\n");
+
+		printf(" > Memory dumped -- %i\n", Memory0.dump("data_dump.bin"));
+		Memory0.clear();
+		printf(" > Memory loaded -- %i\n", Memory0.load("data_dump.bin"));
+		printf("\n");
+
+		printf(" > Retrieving assigned char ---- %c\n", *Memory0.locate<char>(Alloc1));
+		printf(" > Retrieving assigned char ---- %c\n", *Memory0.locate<char>(Alloc4));
+
 	}
 
 

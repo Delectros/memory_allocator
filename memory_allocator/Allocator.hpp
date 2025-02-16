@@ -1,12 +1,11 @@
 // Title ------ Memory allocator
 // Author ----- Delectros
-// Last edit -- 2025.02.14
+// Last edit -- 2025.02.17
 
 
-// Preprocessor definitions required by MSVC:
+// C/C++ Preprocessor definitions required by MSVC:
 /*
-	_CRT_SECURE_NO_DEPRECATE
-	_CRT_NONSTDC_NO_DEPRECATE
+	_CRT_SECURE_NO_WARNINGS
 */
 
 
@@ -159,7 +158,10 @@ namespace allocator {
 
 		bool member(const void* data);
 
-		void clear();
+		bool dump(const char* file_path);
+		bool load(const char* file_path);
+
+		void clear(const size_t data_head = 0);
 		
 		void info();
 	};
